@@ -1,0 +1,162 @@
+<div class="inner-spread-container" id="inner-spread">
+          <!-- Left Spread Page -->
+          <div class="spread-page spread-page-left">
+            <div class="page-inner-content">
+              <span class="chapter-tag">Глава I • Легендарная встреча</span>
+              <h2 class="page-title">Пара по белорусскому языку</h2>
+              <div class="story-block">
+                <p class="drop-capital">
+                  Первый курс университета. В аудитории царило напряжение перед суровой сессией и парой по белорусскому языку. План автора был гениален: подсесть к самой прилежной, красивой и прилежной студентке, чтобы она спасла его от провала.
+                </p>
+                <div class="scroll-quote-box">
+                  «Но судьба распорядилась иначе: вместо спасения автор на все последующие годы сам превратился в её бессменного репетитора, защитника и главного ликвидатора экзаменационной паники!»
+                </div>
+              </div>
+
+              <!-- Mini dossier without emojis -->
+              <div class="witch-dossier">
+                <div class="dossier-header">
+                  <span class="dossier-icon">✦</span>
+                  <h4>Досье Ведьмочки</h4>
+                </div>
+                <ul>
+                  <li><strong>Имя:</strong> Аня</li>
+                  <li><strong>День рождения:</strong> 22 сентября</li>
+                  <li><strong>Суперсила:</strong> Грация и энергия современных танцев</li>
+                  <li><strong>Слабость:</strong> Спелая клубника и авторская кухня</li>
+                  <li><strong>Убойное оружие:</strong> Угроза навести «порчу на понос»</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Spread Page -->
+          <div class="spread-page spread-page-right">
+            <div class="page-inner-content">
+              <span class="chapter-tag">Ритуал спокойствия</span>
+              <h2 class="page-title">Фирменный удар кулачком</h2>
+              <p class="sub-text">
+                Перед любым важным тестом уровень тревоги у Ани зашкаливает. Её проверенный способ выпустить пар — зарядить автору кулачком прямо в плечо!
+              </p>
+
+              <!-- Interactive Punch Box -->
+              <div class="punch-box">
+                <div class="punch-target-area" id="punch-target-area">
+                  <div class="shoulder-icon">
+                    <svg viewBox="0 0 100 100" class="shield-svg">
+                      <path d="M50,5 L85,20 L85,55 C85,75 50,95 50,95 C50,95 15,75 15,55 L15,20 Z" fill="#2d2836" stroke="#cba043" stroke-width="3"/>
+                      <polygon points="50,25 57,40 73,42 61,53 65,70 50,60 35,70 39,53 27,42 43,40" fill="#eb7fa7"/>
+                    </svg>
+                  </div>
+                  <div class="punch-burst" id="punch-burst">ПУНЬК!</div>
+                </div>
+                <button class="grimoire-action-btn" id="punch-action-btn">
+                  Ударить автора в плечо!
+                </button>
+                <div class="punch-score">
+                  Ударов для снятия стресса: <strong id="punch-counter-val">0</strong>
+                </div>
+                <div class="punch-status-text" id="punch-status-text">
+                  Нажми, чтобы нейтрализовать панику перед экзаменом!
+                </div>
+              </div>
+
+              <!-- Navigation to other chapters in book -->
+              <div class="book-nav-tabs">
+                <button class="nav-leaf-btn active" data-chapter="1">Хроники</button>
+                <button class="nav-leaf-btn" data-chapter="2">Котёл</button>
+                <button class="nav-leaf-btn" data-chapter="3">Полароиды (17)</button>
+                <button class="nav-leaf-btn" data-chapter="4">Пожелание</button>
+              </div>
+
+              <div class="close-grimoire-wrapper">
+                <button class="close-book-link" id="close-book-link">
+                  Закрыть гримуар
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chapter 2: Cauldron Overlay -->
+          <div class="chapter-overlay chapter-2 hidden" id="chapter-2-overlay">
+            <div class="spread-page spread-page-left">
+              <span class="chapter-tag">Глава II • Зельеварение</span>
+              <h2 class="page-title">Котёл Антистресса</h2>
+              <p class="sub-text">Добавь 4 священных ингредиента, чтобы сварить эликсир спокойствия:</p>
+              <div class="cauldron-ing-grid">
+                <div class="cauldron-ing-item" data-ing="strawberry">
+                  <span class="c-title">Спелая клубника</span>
+                  <span class="c-sub">+100 к радости</span>
+                </div>
+                <div class="cauldron-ing-item" data-ing="dance">
+                  <span class="c-title">Ритм контемпа</span>
+                  <span class="c-sub">Магия пластики</span>
+                </div>
+                <div class="cauldron-ing-item" data-ing="cooking">
+                  <span class="c-title">Авторская кухня</span>
+                  <span class="c-sub">Лучшее лекарство</span>
+                </div>
+                <div class="cauldron-ing-item" data-ing="shield">
+                  <span class="c-title">Щит от сессий</span>
+                  <span class="c-sub">0% паники</span>
+                </div>
+              </div>
+            </div>
+            <div class="spread-page spread-page-right center-align">
+              <span class="chapter-tag">Варка эликсира</span>
+              <h2 class="page-title">Котёл Ведьмочки</h2>
+              <div class="mini-cauldron">
+                <div class="steam-flow">✦ ✧ ✦</div>
+                <div class="pot-body"><div class="pot-liquid" id="pot-liquid-fx"></div></div>
+                <div class="pot-fire">✦ ✦ ✦</div>
+              </div>
+              <div class="cauldron-result-text" id="cauldron-result-text">
+                Бросай ингредиенты слева!
+              </div>
+            </div>
+          </div>
+
+          <!-- Chapter 3: Polaroid Gallery Overlay -->
+          <div class="chapter-overlay chapter-3 hidden" id="chapter-3-overlay">
+            <div class="full-spread-gallery">
+              <div class="gallery-spread-header">
+                <span class="chapter-tag">Глава III • Хроники 2023–2026</span>
+                <h2 class="page-title">Полароид-альбом воспоминаний</h2>
+              </div>
+              <div class="gallery-polaroid-scroll" id="gallery-polaroid-scroll">
+                <!-- 17 photos dynamically loaded -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Chapter 4: Letter & Wish Overlay -->
+          <div class="chapter-overlay chapter-4 hidden" id="chapter-4-overlay">
+            <div class="spread-page spread-page-left">
+              <span class="chapter-tag">Глава IV • Послание</span>
+              <h2 class="page-title">Любимой Ведьмочке</h2>
+              <div class="letter-scroll-content">
+                <p>С днём рождения, Анечка!</p>
+                <p>С той самой пары по белорусскому языку ты принесла в мою жизнь столько смеха, тепла, танцев и настоящей магии.</p>
+                <p>Пусть никакие экзамены и дедлайны никогда не гасят твой огонь. А если что — моё плечо всегда готово принять удар, а на столе всегда будет ждать клубника и авторский ужин!</p>
+                <p class="letter-author-sign">Всегда твой защитник и репетитор</p>
+              </div>
+            </div>
+            <div class="spread-page spread-page-right center-align">
+              <span class="chapter-tag">Кульминация</span>
+              <h2 class="page-title">Загадай желание</h2>
+              <div class="wish-ritual-box">
+                <div class="wish-cake-anim">✦ ✦ ✦</div>
+                <p>Загадай самое заветное желание и нажми на печать:</p>
+                <button class="grimoire-action-btn wish-fire-btn" id="wish-fire-btn">
+                  Загадать желание!
+                </button>
+                <div class="wish-done-msg hidden" id="wish-done-msg">
+                  Заклинание отправлено во Вселенную! Оно обязательно сбудется!
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        

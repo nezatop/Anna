@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Гримуар Ведьмочки • С Днём Рождения, Аня!</title>
+  <!-- Favicon without emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><polygon points=%2250,5 64,36 98,38 72,60 80,95 50,75 20,95 28,60 2,38 36,36%22 fill=%22%23eb7fa7%22/></svg>">
+  <!-- Google Fonts: Comforter Brush (Headings) & Caveat (Secondary / Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Comforter+Brush&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Music Audio Track -->
+  <audio id="bg-music" src="Waltz_of_the_Willow_Tree.mp3" preload="auto" loop></audio>
+
+  <!-- Floating Sound & Music Control Button -->
+  <button id="sound-btn" class="sound-control-btn" title="Музыка: Вкл / Выкл" aria-label="Музыка">
+    <span id="sound-icon">🎵</span>
+  </button>
+
+  <!-- Pure CSS Parallax Pixel Stars (Purple/Violet cosmos) -->
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+
+  <!-- Ambient Magic Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Wooden Table Scene Viewport (Perspective Container) -->
+  <div class="scene-viewport" id="scene-viewport">
+
+    <!-- Ambient Shadow Under Book on Table Floor -->
+    <div class="table-floor-shadow"></div>
+
+    <!-- 3D BOOK WRAPPER (Occupies ~80% of screen) -->
+    <div class="book-perspective-box" id="book-perspective-box">
+      
+      <div class="book-3d closed-angle" id="book-3d">
+
+        <!-- 3D Book Thickness (Unified Solid Paper Block) -->
+        <div class="book-spine-block"></div>
+        <div class="book-pages-right"></div>
+        <div class="book-pages-bottom"></div>
+        <div class="book-pages-top"></div>
+
+        <!-- Back Cover Base -->
+        <div class="book-cover-back"></div>
+
+        <!-- 3D BOOK PAGES STACK (MULTI-LEAF TURNING SPREADS) -->
+        <div class="book-pages-stack" id="book-pages-stack">
+
+          <!-- Base Right Page: Chapter IV Wish Ritual (Spread 6 Right) -->
+          <div class="book-page-base" id="book-page-base">
+            <div class="page-inner-content center-align ritual-page-inner">
+              <span class="chapter-tag">Кульминация • Загадай желание</span>
+              <h2 class="page-title">Магический Ритуал</h2>
+              <div class="wish-ritual-box">
+                <div class="wish-cake-anim">
+                  <span class="cake-sparkle-star star-left">✦</span>
+                  <span class="cake-sparkle-glow glow-left">✨</span>
+                  <span class="cake-emoji-wrap">🎂</span>
+                  <span class="cake-sparkle-glow glow-right">✨</span>
+                  <span class="cake-sparkle-star star-right">✦</span>
+                </div>
+                <p class="sub-text ritual-instruction">Загадай самое сокровенное желание, закрой глаза и активируй печать судьбы:</p>
+                <button class="grimoire-action-btn wish-fire-btn" id="wish-fire-btn">
+                  <span class="wish-btn-txt">Загадать желание! ✨</span>
+                </button>
+                <div class="wish-done-msg hidden" id="wish-done-msg">
+                  <div class="wish-done-title">✨ Заклинание отправлено во Вселенную! ✨</div>
+                  <div class="wish-done-sub">Твоё желание обязательно сбудется в этот волшебный год! 💖</div>
+                </div>
+              </div>
+              <div class="page-bottom-nav nav-right-align">
+                <button class="close-book-link page-close-btn" title="Закрыть гримуар">
+                  Закрыть гримуар ✕
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leaf 6: Chapter 3 Polaroids (Part 4) [Front] | Chapter 4 Letter [Back] -->
+          <div class="book-page-leaf" id="leaf-6" data-leaf="6">
+            <!-- Front Face: Polaroids Part 4 (Spread 5 Right) -->
+            <div class="leaf-face leaf-face-front">
+              <div class="page-inner-content">
+                <span class="chapter-tag">Глава III • Хроники 2025–2026</span>
+                <h2 class="page-title">Альбом воспоминаний (IV)</h2>
+                <div class="polaroids-grid" id="polaroids-grid-4"></div>
+                <div class="page-bottom-nav nav-right-align">
+                  <button class="nav-next-btn" data-target="6">Послание ❯</button>
+                </div>
+              </div>
+            </div>
+            <!-- Back Face: Birthday Letter (Spread 6 Left) -->
+            <div class="leaf-face leaf-face-back">
+              <div class="page-inner-content">
+                <span class="chapter-tag">Глава IV • Послание</span>
+                <h2 class="page-title">Ведьмочке</h2>
+                <div class="letter-scroll-content">
+                  <p class="letter-greeting">С днём рождения, Анечка! ✨</p>
+                  <p>С той самой пары по белорусскому языку ты принесла в мою жизнь столько смеха, тепла, танцев и настоящей магии.</p>
+                  <p>Пусть никакие экзамены и дедлайны никогда не гасят твой внутренний огонь. А если что — моё плечо всегда готово принять удар, а на столе всегда будет ждать клубника и авторский ужин!</p>
+                  <p class="letter-author-sign">Всегда твой защитник и репетитор 💖</p>
+                </div>
+                <div class="page-bottom-nav nav-left-align">
+                  <button class="nav-prev-btn" data-target="5">❮ Альбом II</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leaf 5: Chapter 3 Polaroids (Part 2) [Front] | Chapter 3 Polaroids (Part 3) [Back] -->
+          <div class="book-page-leaf" id="leaf-5" data-leaf="5">
+            <!-- Front Face: Polaroids Part 2 (Spread 4 Right) -->
+            <div class="leaf-face leaf-face-front">
+              <div class="page-inner-content">
+                <span class="chapter-tag">Глава III • Хроники 2023–2024</span>
+                <h2 class="page-title">Альбом воспоминаний (II)</h2>
+                <div class="polaroids-grid" id="polaroids-grid-2"></div>
+                <div class="page-bottom-nav nav-right-align">
+                  <button class="nav-next-btn" data-target="5">Альбом II ❯</button>
+                </div>
+              </div>
+            </div>
+            <!-- Back Face: Polaroids Part 3 (Spread 5 Left) -->
+            <div class="leaf-face leaf-face-back">
+              <div class="page-inner-content">
+                <span class="chapter-tag">Глава III • Хроники 2025–2026</span>
+                <h2 class="page-title">Альбом воспоминаний (III)</h2>
+                <div class="polaroids-grid" id="polaroids-grid-3"></div>
+                <div class="page-bottom-nav nav-left-align">
+                  <button class="nav-prev-btn" data-target="4">❮ Альбом I</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leaf 4: Chapter 2 Cauldron [Front] | Chapter 3 Polaroids (Part 1) [Back] -->
+          <div class="book-page-leaf" id="leaf-4" data-leaf="4">
+            <!-- Front Face: Cauldron (Spread 3 Right) -->
+            <div class="leaf-face leaf-face-front">
+              <div class="page-inner-content cauldron-brewing-page">
+                <span class="chapter-tag">Варка эликсира • Магия огня</span>
+                <h2 class="page-title">Котёл Ведьмочки</h2>
+
+                <!-- Grand Animated SVG Cauldron -->
+                <div class="cauldron-stage-box" id="cauldron-stage-box" title="Нажми, чтобы помешать зелье!">
+                  <!-- Materializing Potion Bottle on complete -->
+                  <div class="elixir-bottle-award" id="elixir-bottle-award">
+                    <div class="bottle-glow-halo"></div>
+                    <div class="bottle-emoji">🧪✨</div>
+                    <div class="bottle-tag">Эликсир Счастья</div>
+                  </div>
+
+                  <svg class="cauldron-grand-svg" viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <!-- Iron Cauldron Gradient -->
+                      <radialGradient id="cauldronIronGrad" cx="35%" cy="40%" r="65%">
+                        <stop offset="0%" stop-color="#4a4254" />
+                        <stop offset="45%" stop-color="#282230" />
+                        <stop offset="85%" stop-color="#141019" />
+                        <stop offset="100%" stop-color="#08060a" />
+                      </radialGradient>
+
+                      <!-- Golden Rim Gradient -->
+                      <linearGradient id="cauldronGoldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fef08a" />
+                        <stop offset="45%" stop-color="#ca8a04" />
+                        <stop offset="100%" stop-color="#713f12" />
+                      </linearGradient>
+
+                      <!-- Fire Gradients -->
+                      <linearGradient id="fireOuterGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#991b1b" />
+                        <stop offset="40%" stop-color="#ea580c" />
+                        <stop offset="80%" stop-color="#f59e0b" />
+                        <stop offset="100%" stop-color="#fef08a" />
+                      </linearGradient>
+
+                      <linearGradient id="fireInnerGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#dc2626" />
+                        <stop offset="50%" stop-color="#f59e0b" />
+                        <stop offset="100%" stop-color="#ffffff" />
+                      </linearGradient>
+
+                      <!-- Potion Liquid Dynamic Radial Gradient -->
+                      <radialGradient id="potionLiquidGrad" cx="50%" cy="50%" r="50%">
+                        <stop id="pot-stop-0" offset="0%" stop-color="#fbcfe8" />
+                        <stop id="pot-stop-1" offset="65%" stop-color="#db2777" />
+                        <stop id="pot-stop-2" offset="100%" stop-color="#831843" />
+                      </radialGradient>
+
+                      <filter id="cauldronGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+
+                    <!-- Animated Magical Steam Clouds -->
+                    <g class="svg-steam-group">
+                      <path class="steam-path steam-1" d="M 110,65 Q 100,45 112,25 Q 120,10 115,2" fill="none" stroke="rgba(244, 114, 182, 0.45)" stroke-width="3" stroke-linecap="round" />
+                      <path class="steam-path steam-2" d="M 130,65 Q 138,40 128,20 Q 122,8 130,0" fill="none" stroke="rgba(251, 191, 36, 0.45)" stroke-width="3.5" stroke-linecap="round" />
+                      <path class="steam-path steam-3" d="M 150,65 Q 160,45 148,25 Q 140,10 146,2" fill="none" stroke="rgba(192, 132, 252, 0.45)" stroke-width="3" stroke-linecap="round" />
+                    </g>
+
+                    <!-- Dancing Campfire beneath Cauldron -->
+                    <g class="svg-fire-group">
+                      <!-- Fire Wood Logs -->
+                      <path d="M 75,190 L 185,190 L 180,198 L 80,198 Z" fill="#3f2e20" stroke="#1f140e" stroke-width="1.5" />
+                      <path d="M 90,188 L 170,188" stroke="#78350f" stroke-width="3" stroke-linecap="round" />
+                      <!-- Outer Flame Tongue -->
+                      <path class="flame-outer" d="M 85,190 Q 95,145 115,160 Q 130,132 145,160 Q 165,145 175,190 Z" fill="url(#fireOuterGrad)" filter="url(#cauldronGlow)" />
+                      <!-- Inner Flame Tongue -->
+                      <path class="flame-inner" d="M 100,190 Q 110,155 125,165 Q 130,145 135,165 Q 150,155 160,190 Z" fill="url(#fireInnerGrad)" />
+                    </g>
+
+                    <!-- Claw Tripod Legs -->
+                    <g class="svg-cauldron-legs" fill="#1c1722" stroke="#0d0a10" stroke-width="1.5">
+                      <path d="M 70,165 Q 55,185 50,195 Q 60,196 68,190 Q 78,180 82,165 Z" />
+                      <path d="M 190,165 Q 205,185 210,195 Q 200,196 192,190 Q 182,180 178,165 Z" />
+                      <path d="M 125,175 L 135,175 L 133,194 L 127,194 Z" fill="#141019" />
+                    </g>
+
+                    <!-- Heavy Cauldron Pot Belly -->
+                    <path class="cauldron-body-path" d="M 55,85 C 50,135 75,178 130,178 C 185,178 210,135 205,85 Z" fill="url(#cauldronIronGrad)" stroke="#0d0a10" stroke-width="3" />
+
+                    <!-- Side Ring Handles -->
+                    <g class="cauldron-handles">
+                      <ellipse cx="48" cy="100" rx="9" ry="12" fill="none" stroke="url(#cauldronGoldRim)" stroke-width="3.5" />
+                      <rect x="52" y="94" width="8" height="12" rx="2" fill="#282230" stroke="#0d0a10" stroke-width="1.2" />
+                      <ellipse cx="212" cy="100" rx="9" ry="12" fill="none" stroke="url(#cauldronGoldRim)" stroke-width="3.5" />
+                      <rect x="200" y="94" width="8" height="12" rx="2" fill="#282230" stroke="#0d0a10" stroke-width="1.2" />
+                    </g>
+
+                    <!-- Mystical Carved Runes on Belly (Glows softly) -->
+                    <g class="cauldron-runes" stroke="#f472b6" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.85" filter="url(#cauldronGlow)">
+                      <path d="M 130,122 L 130,138 M 122,130 L 138,130 M 124,124 L 136,136 M 124,136 L 136,124" />
+                      <path d="M 98,124 L 106,130 L 98,136 M 106,124 L 106,136" />
+                      <path d="M 162,124 L 154,130 L 162,136 M 154,124 L 154,136" />
+                    </g>
+
+                    <!-- Bubbling Potion Liquid (Inside Mouth) -->
+                    <g class="cauldron-liquid-mouth">
+                      <ellipse cx="130" cy="85" rx="72" ry="20" fill="url(#potionLiquidGrad)" id="pot-liquid-svg-fx" filter="url(#cauldronGlow)" />
+                      <!-- Boiling Bubbles -->
+                      <circle class="potion-bubble pb-1" cx="110" cy="85" r="4.5" fill="rgba(255,255,255,0.75)" />
+                      <circle class="potion-bubble pb-2" cx="135" cy="80" r="6" fill="rgba(255,255,255,0.85)" />
+                      <circle class="potion-bubble pb-3" cx="152" cy="87" r="3.8" fill="rgba(255,255,255,0.7)" />
+                      <circle class="potion-bubble pb-4" cx="125" cy="90" r="5" fill="rgba(255,255,255,0.8)" />
+                    </g>
+
+                    <!-- Golden Riveted Rim / Lip -->
+                    <ellipse cx="130" cy="85" rx="76" ry="17" fill="none" stroke="url(#cauldronGoldRim)" stroke-width="4.5" />
+                    <ellipse cx="130" cy="85" rx="78" ry="19" fill="none" stroke="#0d0a10" stroke-width="1.2" />
+
+                    <!-- Golden Studs around rim -->
+                    <circle cx="68" cy="86" r="2.2" fill="#fef08a" />
+                    <circle cx="95" cy="95" r="2.2" fill="#fef08a" />
+                    <circle cx="130" cy="98" r="2.2" fill="#fef08a" />
+                    <circle cx="165" cy="95" r="2.2" fill="#fef08a" />
+                    <circle cx="192" cy="86" r="2.2" fill="#fef08a" />
+                  </svg>
+                </div>
+
+                <!-- Controls & Result Section -->
+                <div class="cauldron-interactive-panel">
+                  <!-- Stir Spoon Button -->
+                  <button class="cauldron-stir-btn" id="cauldron-stir-btn" title="Помешать зелье">
+                    Помешать зелье 🥄✨
+                  </button>
+
+                  <!-- Dynamic Status Scroll / Message -->
+                  <div class="cauldron-status-scroll" id="cauldron-result-text">
+                    Бросай священные ингредиенты слева, чтобы начать варку! 🍓
+                  </div>
+
+                  <!-- Reset Button (hidden initially, appears when finished) -->
+                  <button class="cauldron-reset-btn hidden" id="cauldron-reset-btn">
+                    Сварить снова 🔄
+                  </button>
+                </div>
+
+                <div class="page-bottom-nav nav-right-align">
+                  <button class="nav-next-btn" data-target="4">Альбом I ❯</button>
+                </div>
+              </div>
+            </div>
+            <!-- Back Face: Polaroids Part 1 (Spread 4 Left) -->
+            <div class="leaf-face leaf-face-back">
+              <div class="page-inner-content">
+                <span class="chapter-tag">Глава III • Хроники 2023–2024</span>
+                <h2 class="page-title">Альбом воспоминаний (I)</h2>
+                <div class="polaroids-grid" id="polaroids-grid-1"></div>
+                <div class="page-bottom-nav nav-left-align">
+                  <button class="nav-prev-btn" data-target="3">❮ Котёл</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leaf 3: Chapter 1 Punch [Front] | Chapter 2 Ingredients [Back] -->
+          <div class="book-page-leaf" id="leaf-3" data-leaf="3">
+            <!-- Front Face: Shoulder Punch (Spread 2 Right) -->
+            <div class="leaf-face leaf-face-front">
+              <div class="page-inner-content punch-page-content">
+                <span class="chapter-tag">Ритуал спокойствия • Антистресс</span>
+                <h2 class="page-title">Фирменный удар кулачком</h2>
+                <p class="punch-intro-text">
+                  Перед любым важным тестом уровень тревоги у Ани зашкаливает. Её проверенный ведьминский способ выпустить пар — зарядить автору кулачком прямо в плечо!
+                </p>
+
+                <div class="punch-interactive-card">
+                  <!-- Stress / Panic Level Gauge -->
+                  <div class="panic-meter-wrap">
+                    <div class="panic-meter-header">
+                      <span class="panic-meter-label">Уровень паники перед экзаменом:</span>
+                      <span class="panic-meter-val" id="panic-percent-val">100%</span>
+                    </div>
+                    <div class="panic-meter-track">
+                      <div class="panic-meter-fill" id="panic-meter-bar" style="width: 100%;"></div>
+                    </div>
+                  </div>
+
+                  <!-- Clickable Armored Shoulder Target Area -->
+                  <div class="punch-target-wrapper" id="punch-target-area" title="Нажми прямо сюда или на кнопку, чтобы ударить!">
+                    <div class="target-shoulder-art">
+                      <svg viewBox="0 0 160 140" class="shoulder-target-svg" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="armorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#3b2d4a" />
+                            <stop offset="60%" stop-color="#231a2f" />
+                            <stop offset="100%" stop-color="#140e1c" />
+                          </linearGradient>
+                          <radialGradient id="targetRedGrad" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#ff4d6d" />
+                            <stop offset="60%" stop-color="#c9184a" />
+                            <stop offset="100%" stop-color="#800f2f" />
+                          </radialGradient>
+                          <linearGradient id="goldPlateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fef08a" />
+                            <stop offset="50%" stop-color="#eab308" />
+                            <stop offset="100%" stop-color="#854d0e" />
+                          </linearGradient>
+                        </defs>
+                        <!-- Author Shoulder Silhouette with Armor Pad -->
+                        <path d="M 20,130 C 25,75 55,42 95,38 C 125,40 145,55 155,130 Z" fill="url(#armorGrad)" stroke="#cba043" stroke-width="2" />
+                        <!-- Golden Pauldron / Shoulder Guard Rim -->
+                        <path d="M 30,120 C 40,70 65,48 100,45 C 122,46 138,58 145,120" fill="none" stroke="url(#goldPlateGrad)" stroke-width="3" stroke-dasharray="8,4" />
+                        <!-- Bullseye Target on Shoulder -->
+                        <g class="target-bullseye">
+                          <circle cx="95" cy="85" r="42" fill="url(#targetRedGrad)" stroke="#ffffff" stroke-width="2.5" />
+                          <circle cx="95" cy="85" r="30" fill="#ffffff" />
+                          <circle cx="95" cy="85" r="20" fill="url(#targetRedGrad)" />
+                          <circle cx="95" cy="85" r="9" fill="#ffffff" />
+                          <circle cx="95" cy="85" r="4" fill="#590d22" />
+                          <!-- Crosshairs -->
+                          <line x1="95" y1="38" x2="95" y2="132" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="3,3" />
+                          <line x1="48" y1="85" x2="142" y2="85" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-dasharray="3,3" />
+                        </g>
+                        <!-- Target label banner -->
+                        <rect x="52" y="112" width="86" height="20" rx="6" fill="#1b1222" stroke="#eab308" stroke-width="1.2" />
+                        <text x="95" y="126" text-anchor="middle" fill="#fef08a" font-family="'Caveat', cursive" font-size="14" font-weight="bold">🎯 БЕЙ СЮДА!</text>
+                      </svg>
+                      <!-- Flying Comic Burst on Hit -->
+                      <div class="punch-burst" id="punch-burst">ПУНЬК!</div>
+                      <!-- Particle Burst Overlay -->
+                      <div class="punch-fx-container" id="punch-fx-container"></div>
+                    </div>
+                  </div>
+
+                  <!-- Juicy Action Button -->
+                  <button class="punch-hit-btn" id="punch-action-btn">
+                    Ударить автора в плечо! ✊💥
+                  </button>
+
+                  <!-- Status Banner and Score Row -->
+                  <div class="punch-meta-row">
+                    <div class="punch-stat-pill">
+                      Снято стресса: <strong id="punch-counter-val">0</strong> <span class="pill-unit">уд.</span>
+                    </div>
+                    <div class="punch-status-bubble" id="punch-status-text">
+                      Нажми, чтобы нейтрализовать панику перед экзаменом!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="page-bottom-nav nav-right-align">
+                  <button class="nav-next-btn" data-target="3">Котёл ❯</button>
+                </div>
+              </div>
+            </div>
+            <!-- Back Face: Cauldron Ingredients (Spread 3 Left) -->
+            <div class="leaf-face leaf-face-back">
+              <div class="page-inner-content cauldron-ingredients-page">
+                <span class="chapter-tag">Глава II • Тайное зельеварение</span>
+                <h2 class="page-title">Ингредиенты Антистресса</h2>
+                <p class="cauldron-recipe-intro">
+                  Древний рецепт Зелья Абсолютного Спокойствия. Добавь в котёл 4 священных компонента, чтобы победить любую сессию!
+                </p>
+
+                <!-- 2x2 Ingredients Grid -->
+                <div class="cauldron-ing-grid">
+                  <div class="cauldron-ing-item" data-ing="strawberry">
+                    <div class="ing-card-top">
+                      <span class="ing-icon">🍓</span>
+                      <span class="c-title">Спелая клубника</span>
+                    </div>
+                    <span class="c-sub">+100 к чистой радости</span>
+                    <span class="ing-badge">Бросить ✦</span>
+                  </div>
+
+                  <div class="cauldron-ing-item" data-ing="dance">
+                    <div class="ing-card-top">
+                      <span class="ing-icon">💃</span>
+                      <span class="c-title">Ритм контемпа</span>
+                    </div>
+                    <span class="c-sub">Магия грации и танца</span>
+                    <span class="ing-badge">Бросить ✦</span>
+                  </div>
+
+                  <div class="cauldron-ing-item" data-ing="cooking">
+                    <div class="ing-card-top">
+                      <span class="ing-icon">🍳</span>
+                      <span class="c-title">Авторская кухня</span>
+                    </div>
+                    <span class="c-sub">Лучшее лекарство от хандры</span>
+                    <span class="ing-badge">Бросить ✦</span>
+                  </div>
+
+                  <div class="cauldron-ing-item" data-ing="shield">
+                    <div class="ing-card-top">
+                      <span class="ing-icon">🛡️</span>
+                      <span class="c-title">Щит от сессий</span>
+                    </div>
+                    <span class="c-sub">Непробиваемый купол 0% паники</span>
+                    <span class="ing-badge">Бросить ✦</span>
+                  </div>
+                </div>
+
+                <!-- Progress Counter Bar -->
+                <div class="cauldron-progress-card">
+                  <div class="cauldron-progress-header">
+                    <span class="cauldron-progress-label">Брошено в котёл:</span>
+                    <span class="cauldron-progress-val"><strong id="cauldron-ing-count">0</strong> / 4</span>
+                  </div>
+                  <div class="cauldron-progress-track">
+                    <div class="cauldron-progress-bar" id="cauldron-progress-bar" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <div class="page-bottom-nav nav-left-align">
+                  <button class="nav-prev-btn" data-target="2">❮ Удар кулачком</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leaf 2: Dossier Part 2 Abilities [Front] | Chapter 1 Story [Back] -->
+          <div class="book-page-leaf" id="leaf-2" data-leaf="2">
+            <!-- Front Face: Ведьминские способности (Spread 1 Right) -->
+            <div class="leaf-face leaf-face-front dossier-page-face">
+              <div class="parchment-frame-border">
+                <div class="frame-corner c-tl">✦</div>
+                <div class="frame-corner c-tr">✦</div>
+                <div class="frame-corner c-bl">✦</div>
+                <div class="frame-corner c-br">✦</div>
+              </div>
+              <div class="page-inner-content dossier-page-content">
+
+                <div class="dossier-main-header">
+                  <span class="dossier-sup-tag">Реестр магических сил Гримуара</span>
+                  <h1 class="dossier-super-title">Ведьминские способности</h1>
+                </div>
+
+                <div class="dossier-abilities-section">
+                  <div class="abilities-cards-grid">
+
+                    <!-- Card 1: Порчи -->
+                    <div class="ability-card card-curse">
+                      <div class="ability-card-header">
+                        <span class="ability-icon">💀</span>
+                        <h4 class="ability-name">Порчи</h4>
+                      </div>
+                      <div class="ability-field">
+                        <span class="a-label">На кого работает:</span>
+                        <span class="a-val">На обидчиков, вредных преподавателей и душнил.</span>
+                      </div>
+                      <div class="ability-field">
+                        <span class="a-label">Уровень опасности:</span>
+                        <span class="a-val a-danger">Критический (10/10) • «Порча на понос» бьёт без промаха на любом расстоянии!</span>
+                      </div>
+                    </div>
+
+                    <!-- Card 2: Проклятия -->
+                    <div class="ability-card card-hex">
+                      <div class="ability-card-header">
+                        <span class="ability-icon">⚡</span>
+                        <h4 class="ability-name">Проклятия</h4>
+                      </div>
+                      <div class="ability-field">
+                        <span class="a-label">На кого работает:</span>
+                        <span class="a-val">На всех окружающих в радиусе 10 метров перед зачётами и сессиями.</span>
+                      </div>
+                      <div class="ability-field">
+                        <span class="a-label">Уровень опасности:</span>
+                        <span class="a-val a-high">Высокий • Вводит в транс безудержного танца и паники.</span>
+                      </div>
+                    </div>
+
+                    <!-- Card 3: Привороты -->
+                    <div class="ability-card card-charm">
+                      <div class="ability-card-header">
+                        <span class="ability-icon">💖</span>
+                        <h4 class="ability-name">Привороты</h4>
+                      </div>
+                      <div class="ability-field">
+                        <span class="a-label">На кого работает:</span>
+                        <span class="a-val">На автора (сработал на 100% с 1-го курса) и на хороших людей.</span>
+                      </div>
+                      <div class="ability-field">
+                        <span class="a-label">Уровень опасности:</span>
+                        <span class="a-val a-lethal">Абсолютный • Спасения нет, только кормить клубникой!</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="page-bottom-nav nav-right-align">
+                  <button class="nav-next-btn" data-target="2">
+                    Глава I • Встреча ❯
+                  </button>
+                </div>
+
+              </div>
+            </div>
+            <!-- Back Face: Chapter 1 Story (Spread 2 Left) -->
+            <div class="leaf-face leaf-face-back">
+              <div class="page-inner-content">
+                <span class="chapter-tag">Глава I • Легендарная встреча</span>
+                <h2 class="page-title">Пара по белорусскому языку</h2>
+                <div class="story-block chapter-1-story">
+                  <p class="drop-capital">
+                    Первый курс университета. В аудитории царило напряжение перед суровой сессией и парой по белорусскому языку. План автора был гениален: подсесть к самой прилежной и красивой студентке, чтобы она спасла его от провала.
+                  </p>
+                  <div class="scroll-quote-box chapter-quote">
+                    «Но судьба распорядилась иначе: вместо спасения автор на все последующие годы сам превратился в её бессменного репетитора, защитника и главного ликвидатора экзаменационной паники!»
+                  </div>
+                </div>
+
+                <!-- Animated SVG Pictograph: Magic Study / Grand Enchanted Grimoire & Celestial Sigils -->
+                <div class="chapter-illu-container" aria-label="Магическая встреча на первом курсе">
+                  <svg class="magic-study-svg" viewBox="0 0 420 185" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <!-- Rich Gradients -->
+                      <linearGradient id="goldSigilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fff8e7" />
+                        <stop offset="35%" stop-color="#e2b755" />
+                        <stop offset="70%" stop-color="#b88628" />
+                        <stop offset="100%" stop-color="#734e12" />
+                      </linearGradient>
+
+                      <linearGradient id="quillFeatherGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fdf2f8" />
+                        <stop offset="25%" stop-color="#f472b6" />
+                        <stop offset="60%" stop-color="#db2777" />
+                        <stop offset="85%" stop-color="#9333ea" />
+                        <stop offset="100%" stop-color="#4c0519" />
+                      </linearGradient>
+
+                      <linearGradient id="inkpotGlassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3730a3" />
+                        <stop offset="50%" stop-color="#1e1b4b" />
+                        <stop offset="100%" stop-color="#09090b" />
+                      </linearGradient>
+
+                      <linearGradient id="potionGlowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#f43f5e" />
+                        <stop offset="45%" stop-color="#ec4899" />
+                        <stop offset="80%" stop-color="#d946ef" />
+                        <stop offset="100%" stop-color="#8b5cf6" />
+                      </linearGradient>
+
+                      <linearGradient id="grimoireCoverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#4c0519" />
+                        <stop offset="50%" stop-color="#26040d" />
+                        <stop offset="100%" stop-color="#0f0205" />
+                      </linearGradient>
+
+                      <linearGradient id="grimoirePageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="40%" stop-color="#faf5ea" />
+                        <stop offset="100%" stop-color="#ecd9b9" />
+                      </linearGradient>
+
+                      <radialGradient id="magicAuraGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#f472b6" stop-opacity="0.38" />
+                        <stop offset="50%" stop-color="#ec4899" stop-opacity="0.14" />
+                        <stop offset="85%" stop-color="#a855f7" stop-opacity="0.04" />
+                        <stop offset="100%" stop-color="#ec4899" stop-opacity="0" />
+                      </radialGradient>
+
+                      <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="2.8" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+
+                      <filter id="starGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+
+                    <!-- Background Luminescent Ambient Aura -->
+                    <ellipse cx="210" cy="95" rx="180" ry="78" fill="url(#magicAuraGlow)" />
+
+                    <!-- Rotating Magic Astrology Rings -->
+                    <g class="svg-ring-outer">
+                      <circle cx="210" cy="95" r="68" fill="none" stroke="rgba(236, 72, 153, 0.35)" stroke-width="1.4" stroke-dasharray="8,5" />
+                      <circle cx="210" cy="27" r="3" fill="#f472b6" filter="url(#softGlow)" />
+                      <circle cx="210" cy="163" r="3" fill="#f472b6" filter="url(#softGlow)" />
+                      <circle cx="142" cy="95" r="3" fill="#f472b6" filter="url(#softGlow)" />
+                      <circle cx="278" cy="95" r="3" fill="#f472b6" filter="url(#softGlow)" />
+                      <circle cx="162" cy="47" r="2" fill="#cb9b42" />
+                      <circle cx="258" cy="47" r="2" fill="#cb9b42" />
+                      <circle cx="162" cy="143" r="2" fill="#cb9b42" />
+                      <circle cx="258" cy="143" r="2" fill="#cb9b42" />
+                    </g>
+
+                    <g class="svg-ring-inner">
+                      <circle cx="210" cy="95" r="50" fill="none" stroke="rgba(203, 155, 66, 0.45)" stroke-width="1.2" stroke-dasharray="4,4" />
+                      <polygon points="210,43 213,46 210,49 207,46" fill="#cb9b42" />
+                      <polygon points="210,141 213,144 210,147 207,144" fill="#cb9b42" />
+                      <polygon points="160,95 163,98 160,101 157,98" fill="#cb9b42" />
+                      <polygon points="260,95 263,98 260,101 257,98" fill="#cb9b42" />
+                    </g>
+
+                    <!-- Crescent Moon & Witch Sigil at Top Center -->
+                    <g class="svg-moon-group" transform="translate(0, 0)">
+                      <path d="M 203,12 A 15,15 0 1 0 219,36 A 11,11 0 1 1 203,12 Z" fill="url(#goldSigilGrad)" filter="url(#softGlow)" opacity="0.9" />
+                      <polygon points="216,21 218,25 223,27 218,29 216,34 214,29 209,27 214,25" fill="#f472b6" filter="url(#softGlow)" />
+                    </g>
+
+                    <!-- Flanking Antique Filigree Ornaments -->
+                    <g class="svg-filigree" stroke="url(#goldSigilGrad)" stroke-width="1.4" fill="none" stroke-linecap="round">
+                      <!-- Left Flourish -->
+                      <path d="M 45,156 C 75,152 105,156 128,162" />
+                      <path d="M 65,154 C 72,146 86,147 88,155" />
+                      <circle cx="41" cy="156" r="3" fill="#cb9b42" />
+                      <circle cx="58" cy="150" r="2" fill="#cb9b42" />
+                      <!-- Right Flourish -->
+                      <path d="M 375,156 C 345,152 315,156 292,162" />
+                      <path d="M 355,154 C 348,146 334,147 332,155" />
+                      <circle cx="379" cy="156" r="3" fill="#cb9b42" />
+                      <circle cx="362" cy="150" r="2" fill="#cb9b42" />
+                    </g>
+
+                    <!-- Open Grimoire Book at Bottom -->
+                    <g class="svg-book-group">
+                      <!-- Book Cover Backing Base -->
+                      <path d="M 130,166 Q 210,175 290,166 L 294,161 Q 210,168 126,161 Z" fill="url(#grimoireCoverGrad)" />
+                      <!-- Left Page Thick Layers -->
+                      <path d="M 130,161 C 150,157 185,157 210,163 L 210,135 C 185,129 150,129 130,135 Z" fill="#e2caa3" />
+                      <path d="M 131,159 C 151,155 185,155 210,161 L 210,133 C 185,127 151,127 131,133 Z" fill="url(#grimoirePageGrad)" stroke="#cbb28d" stroke-width="1" />
+                      <!-- Right Page Thick Layers -->
+                      <path d="M 290,161 C 270,157 235,157 210,163 L 210,135 C 235,129 270,129 290,135 Z" fill="#e2caa3" />
+                      <path d="M 289,159 C 269,155 235,155 210,161 L 210,133 C 235,127 269,127 289,133 Z" fill="url(#grimoirePageGrad)" stroke="#cbb28d" stroke-width="1" />
+                      <!-- Center Spine / Binding Line -->
+                      <line x1="210" y1="133" x2="210" y2="162" stroke="#734e12" stroke-width="2.2" />
+                      <!-- Page Shimmer Text Lines -->
+                      <g stroke="rgba(100, 70, 45, 0.4)" stroke-width="1.2" stroke-linecap="round">
+                        <line x1="142" y1="139" x2="198" y2="138" />
+                        <line x1="142" y1="144" x2="196" y2="143" />
+                        <line x1="142" y1="149" x2="192" y2="148" />
+                        <line x1="142" y1="154" x2="188" y2="153" />
+                        <line x1="222" y1="138" x2="278" y2="139" />
+                        <line x1="224" y1="143" x2="278" y2="144" />
+                        <line x1="228" y1="148" x2="275" y2="149" />
+                        <line x1="232" y1="153" x2="270" y2="154" />
+                      </g>
+                      <!-- Silk Bookmark Ribbon draping down -->
+                      <path d="M 210,161 C 211,167 205,170 206,177 L 214,177 C 213,170 211,167 210,161 Z" fill="#ec4899" />
+                      <polygon points="206,177 210,174 214,177" fill="#ffffff" />
+                    </g>
+
+                    <!-- Crystal Inkpot on the left -->
+                    <g class="svg-inkpot-group">
+                      <ellipse cx="106" cy="162" rx="16" ry="5" fill="rgba(0,0,0,0.2)" />
+                      <path d="M 95,159 L 98,145 L 102,141 L 112,141 L 116,145 L 119,159 Z" fill="url(#inkpotGlassGrad)" stroke="url(#goldSigilGrad)" stroke-width="1.4" />
+                      <path d="M 97,158 L 99,148 Q 107,147 115,148 L 117,158 Z" fill="url(#potionGlowGrad)" />
+                      <rect x="100" y="136" width="14" height="5" rx="1.8" fill="url(#goldSigilGrad)" stroke="#734e12" stroke-width="1" />
+                      <line x1="99" y1="146" x2="97" y2="157" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-linecap="round" />
+                      <!-- Bubbles inside potion -->
+                      <circle class="svg-bubble" cx="104" cy="154" r="1.4" fill="#ffffff" opacity="0.8" />
+                      <circle class="svg-bubble" cx="110" cy="151" r="1.8" fill="#fbcfe8" opacity="0.9" />
+                      <circle class="svg-bubble" cx="107" cy="144" r="1.2" fill="#ffffff" opacity="0.7" />
+                    </g>
+
+                    <!-- Rolled Magic Parchment Scroll on the right -->
+                    <g class="svg-scroll-group">
+                      <ellipse cx="314" cy="161" rx="16" ry="4.5" fill="rgba(0,0,0,0.18)" />
+                      <!-- Scroll Body -->
+                      <rect x="298" y="146" width="32" height="14" rx="3" fill="url(#grimoirePageGrad)" stroke="#cbb28d" stroke-width="1" transform="rotate(-6 314 153)" />
+                      <ellipse cx="298" cy="153" rx="3" ry="7" fill="#e2caa3" stroke="#cbb28d" stroke-width="0.8" transform="rotate(-6 298 153)" />
+                      <!-- Pink Tie Ribbon -->
+                      <rect x="312" y="144" width="4" height="15" rx="1" fill="#ec4899" transform="rotate(-6 314 153)" />
+                    </g>
+
+                    <!-- Floating Animated Enchanted Feather Quill -->
+                    <g class="svg-quill-float">
+                      <path class="svg-magic-trail" d="M 235,115 Q 206,102 198,122" fill="none" stroke="url(#potionGlowGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,4" />
+                      <!-- Feather Plume -->
+                      <path class="svg-feather-plume" d="M 292,20 C 275,22 232,44 212,88 C 206,101 209,110 211,114 C 215,108 223,100 233,95 C 250,85 281,75 299,49 C 303,42 302,29 292,20 Z" fill="url(#quillFeatherGrad)" filter="url(#softGlow)" />
+                      <!-- Feather Inner Texture Ribs -->
+                      <g stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" stroke-linecap="round">
+                        <line x1="270" y1="46" x2="286" y2="38" />
+                        <line x1="254" y1="62" x2="272" y2="56" />
+                        <line x1="238" y1="78" x2="254" y2="74" />
+                        <line x1="224" y1="94" x2="236" y2="90" />
+                      </g>
+                      <!-- Central Rachis / Shaft -->
+                      <path d="M 298,18 C 278,33 242,72 212,114 L 204,126 L 202,129" fill="none" stroke="#fffdf5" stroke-width="2.2" stroke-linecap="round" />
+                      <!-- Golden Nib at Tip -->
+                      <polygon points="204,125 196,133 203,132 207,128" fill="url(#goldSigilGrad)" stroke="#734e12" stroke-width="0.8" />
+                      <circle cx="201" cy="129" r="1" fill="#4c0519" />
+                      <!-- Glowing Ink Droplet -->
+                      <circle class="svg-ink-drop" cx="196" cy="136" r="2.8" fill="#f43f5e" filter="url(#softGlow)" />
+                    </g>
+
+                    <!-- Twinkling Witch Stars and Magic Sparkles -->
+                    <g class="svg-stars-group">
+                      <!-- Star 1: Rose (left of quill) -->
+                      <path class="svg-star star-1" d="M 172,52 Q 172,60 180,60 Q 172,60 172,68 Q 172,60 164,60 Q 172,60 172,52 Z" fill="#f472b6" filter="url(#starGlowFilter)" />
+                      <!-- Star 2: Gold (near nib) -->
+                      <path class="svg-star star-2" d="M 220,108 Q 220,114 226,114 Q 220,114 220,120 Q 220,114 214,114 Q 220,114 220,108 Z" fill="#fbbf24" filter="url(#starGlowFilter)" />
+                      <!-- Star 3: Deep Pink (high right) -->
+                      <path class="svg-star star-3" d="M 312,34 Q 312,40 318,40 Q 312,40 312,46 Q 312,40 306,40 Q 312,40 312,34 Z" fill="#ec4899" filter="url(#starGlowFilter)" />
+                      <!-- Star 4: Gold (near inkpot) -->
+                      <path class="svg-star star-4" d="M 124,102 Q 124,107 129,107 Q 124,107 124,112 Q 124,107 119,107 Q 124,107 124,102 Z" fill="#f59e0b" />
+                      <!-- Star 5: Magenta (center float) -->
+                      <path class="svg-star star-5" d="M 245,44 Q 245,49 250,49 Q 245,49 245,54 Q 245,49 240,49 Q 245,49 245,44 Z" fill="#e879f9" />
+                      <!-- Star 6: Golden Amber (right flank) -->
+                      <path class="svg-star star-6" d="M 345,95 Q 345,100 350,100 Q 345,100 345,105 Q 345,100 340,100 Q 345,100 345,95 Z" fill="#fbbf24" />
+                      <!-- Star 7: Rose (left flank) -->
+                      <path class="svg-star star-7" d="M 88,118 Q 88,122 92,122 Q 88,122 88,126 Q 88,122 84,122 Q 88,122 88,118 Z" fill="#f472b6" />
+                      <!-- Floating Sparkle Dust -->
+                      <circle class="svg-dust dust-1" cx="186" cy="78" r="1.8" fill="#fff8e7" />
+                      <circle class="svg-dust dust-2" cx="255" cy="68" r="1.5" fill="#fbcfe8" />
+                      <circle class="svg-dust dust-3" cx="158" cy="94" r="1.6" fill="#fed7aa" />
+                      <circle class="svg-dust dust-4" cx="268" cy="92" r="1.8" fill="#f472b6" />
+                      <circle class="svg-dust dust-5" cx="304" cy="74" r="1.4" fill="#fbcfe8" />
+                      <circle class="svg-dust dust-6" cx="138" cy="65" r="1.5" fill="#fef08a" />
+                    </g>
+                  </svg>
+                </div>
+
+                <div class="page-bottom-nav nav-left-align">
+                  <button class="nav-prev-btn" data-target="1">❮ Способности</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leaf 1: Dossier Part 1 Bio [Front] | Witch Code [Back] -->
+          <div class="book-page-leaf" id="leaf-1" data-leaf="1">
+            <!-- Front Face: Ведьминское досье • Личное дело (Spread 0 Right) -->
+            <div class="leaf-face leaf-face-front dossier-page-face">
+              <div class="parchment-frame-border">
+                <div class="frame-corner c-tl">✦</div>
+                <div class="frame-corner c-tr">✦</div>
+                <div class="frame-corner c-bl">✦</div>
+                <div class="frame-corner c-br">✦</div>
+              </div>
+              <div class="page-inner-content dossier-page-content">
+
+                <div class="dossier-main-header">
+                  <span class="dossier-sup-tag">Секретные материалы Гримуара • Личное дело</span>
+                  <h1 class="dossier-super-title">Ведьминское досье</h1>
+                </div>
+
+                <div class="dossier-bio-grid">
+                  <div class="dossier-photo-col">
+                    <div class="dossier-photo-frame">
+                      <img src="Досье.jpg" alt="Ведьмочка Анна" class="dossier-portrait-img">
+                      <div class="dossier-photo-caption">Объект: Анна ✨</div>
+                    </div>
+                  </div>
+
+                  <div class="dossier-info-col">
+                    <div class="dossier-info-row">
+                      <span class="d-label">Имя:</span>
+                      <span class="d-val highlight-name">Анна (Ведьмочка)</span>
+                    </div>
+                    <div class="dossier-info-row">
+                      <span class="d-label">Возраст:</span>
+                      <span class="d-val">21 год 🎂 (День рождения: 22 сентября)</span>
+                    </div>
+                    <div class="dossier-info-row">
+                      <span class="d-label">Особенности внешности:</span>
+                      <span class="d-val">Обворожительная улыбка, грация танцовщицы контемпа и гипнотический взгляд, способный обезоружить любого с первого взгляда.</span>
+                    </div>
+                    <div class="dossier-info-row">
+                      <span class="d-label">Особенности характера:</span>
+                      <span class="d-val">Добрая, светлая, но с опасным ведьминским огоньком. При панике заряжает кулачком в плечо, не терпит духоты и обожает спелую клубнику.</span>
+                    </div>
+                    <div class="dossier-info-row">
+                      <span class="d-label">Особые слабости:</span>
+                      <span class="d-val">Спелая клубника, авторская кухня и магия танца.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="page-bottom-nav nav-right-align">
+                  <button class="nav-next-btn" data-target="1">
+                    Способности ❯
+                  </button>
+                </div>
+
+              </div>
+            </div>
+            <!-- Back Face: Witch Code (Spread 1 Left) -->
+            <div class="leaf-face leaf-face-back">
+              <div class="parchment-frame-border">
+                <div class="frame-corner c-tl">✦</div>
+                <div class="frame-corner c-tr">✦</div>
+                <div class="frame-corner c-bl">✦</div>
+                <div class="frame-corner c-br">✦</div>
+              </div>
+              <div class="page-inner-content">
+                <span class="chapter-tag">Кодекс Гримуара</span>
+                <h2 class="page-title">Магический кодекс</h2>
+                <div class="witch-rules-list">
+                  <div class="witch-rule-item">
+                    <span class="rule-num">Правило I • Антистресс</span>
+                    <span class="rule-desc">При панике перед экзаменом автор обязан предоставить плечо для терапевтического удара кулачком.</span>
+                  </div>
+                  <div class="witch-rule-item">
+                    <span class="rule-num">Правило II • Клубничный закон</span>
+                    <span class="rule-desc">Вся спелая клубника и авторская кухня в радиусе видимости автоматически принадлежат Ведьмочке.</span>
+                  </div>
+                  <div class="witch-rule-item">
+                    <span class="rule-num">Правило III • Вечный приворот</span>
+                    <span class="rule-desc">Чары, наложенные на первом курсе, действуют бессрочно и обжалованию во Вселенной не подлежат.</span>
+                  </div>
+                </div>
+                <div class="scroll-quote-box">
+                  «Магия Ани — это смесь лучезарной улыбки, грации контемпа и угрозы навести порчу на понос!»
+                </div>
+                <div class="page-bottom-nav nav-left-align">
+                  <button class="nav-prev-btn" data-target="0">❮ Личное дело</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- The Heavy 3D Front Cover Leaf -->
+        <div class="book-cover-leaf" id="book-cover-leaf">
+          
+          <!-- Outer Front Face (Based directly on Reference Image) -->
+          <div class="cover-face-front">
+
+
+
+            <!-- Filigree Ornate Metal Corners (High detail openwork scrollwork) -->
+            <div class="metal-corner corner-tl">
+              <svg viewBox="0 0 100 100" class="corner-filigree-svg">
+                <path d="M0,0 L95,0 C85,12 75,15 65,28 C55,40 40,55 28,65 C15,75 12,85 0,95 Z" fill="url(#cornerGrad)" stroke="#1a1506" stroke-width="2"/>
+                <path d="M8,8 L70,8 C60,18 48,28 28,48 C18,60 8,70 8,70 Z" fill="#1b1720" stroke="#e0b85a" stroke-width="1.2"/>
+                <circle cx="24" cy="24" r="5" fill="url(#rivetGrad2)" stroke="#000" stroke-width="1"/>
+                <!-- Openwork Scrolls -->
+                <path d="M45,14 Q30,20 20,35 Q14,45 14,55" fill="none" stroke="#ffe599" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="metal-corner corner-tr">
+              <svg viewBox="0 0 100 100" class="corner-filigree-svg">
+                <path d="M100,0 L5,0 C15,12 25,15 35,28 C45,40 60,55 72,65 C85,75 88,85 100,95 Z" fill="url(#cornerGrad)" stroke="#1a1506" stroke-width="2"/>
+                <path d="M92,8 L30,8 C40,18 52,28 72,48 C82,60 92,70 92,70 Z" fill="#1b1720" stroke="#e0b85a" stroke-width="1.2"/>
+                <circle cx="76" cy="24" r="5" fill="url(#rivetGrad2)" stroke="#000" stroke-width="1"/>
+                <path d="M55,14 Q70,20 80,35 Q86,45 86,55" fill="none" stroke="#ffe599" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="metal-corner corner-bl">
+              <svg viewBox="0 0 100 100" class="corner-filigree-svg">
+                <path d="M0,100 L95,100 C85,88 75,85 65,72 C55,60 40,45 28,35 C15,25 12,15 0,5 Z" fill="url(#cornerGrad)" stroke="#1a1506" stroke-width="2"/>
+                <path d="M8,92 L70,92 C60,82 48,72 28,52 C18,40 8,30 8,30 Z" fill="#1b1720" stroke="#e0b85a" stroke-width="1.2"/>
+                <circle cx="24" cy="76" r="5" fill="url(#rivetGrad2)" stroke="#000" stroke-width="1"/>
+                <path d="M45,86 Q30,80 20,65 Q14,55 14,45" fill="none" stroke="#ffe599" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="metal-corner corner-br">
+              <svg viewBox="0 0 100 100" class="corner-filigree-svg">
+                <path d="M100,100 L5,100 C15,88 25,85 35,72 C45,60 60,45 72,35 C85,25 88,15 100,5 Z" fill="url(#cornerGrad)" stroke="#1a1506" stroke-width="2"/>
+                <path d="M92,92 L30,92 C40,82 52,72 72,52 C82,40 92,30 92,30 Z" fill="#1b1720" stroke="#e0b85a" stroke-width="1.2"/>
+                <circle cx="76" cy="76" r="5" fill="url(#rivetGrad2)" stroke="#000" stroke-width="1"/>
+                <path d="M55,86 Q70,80 80,65 Q86,55 86,45" fill="none" stroke="#ffe599" stroke-width="1.8"/>
+              </svg>
+            </div>
+
+            <!-- Embossed Stepped Leather Bevels -->
+            <div class="leather-bevel-frame">
+              <div class="leather-inner-panel">
+                
+                <div class="grimoire-header-block">
+                  <h1 class="grimoire-title">ГРИМУАР ВЕДЬМОЧКИ</h1>
+                  <span class="grimoire-subtitle">ANNA • 22 СЕНТЯБРЯ</span>
+                </div>
+
+                <!-- Central Medallion: Ouroboros + Silver Pentagram + Glowing Gem -->
+                <div class="ouroboros-medallion" id="ouroboros-medallion" title="Коснись кристалла">
+                  <div class="aura-glow"></div>
+
+                  <!-- High-detail SVG Ouroboros & Pentagram -->
+                  <svg class="medallion-svg" viewBox="0 0 300 300" style="overflow: visible;">
+                    <defs>
+                      <linearGradient id="ironGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4e4b57"/>
+                        <stop offset="30%" stop-color="#2d2a33"/>
+                        <stop offset="70%" stop-color="#19171f"/>
+                        <stop offset="100%" stop-color="#3c3845"/>
+                      </linearGradient>
+                      <linearGradient id="rivetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="30%" stop-color="#cccccc"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                      </linearGradient>
+                      <linearGradient id="cornerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffe699"/>
+                        <stop offset="45%" stop-color="#cba043"/>
+                        <stop offset="80%" stop-color="#7a5b18"/>
+                        <stop offset="100%" stop-color="#423007"/>
+                      </linearGradient>
+                      <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="35%" stop-color="#c5d0e0"/>
+                        <stop offset="70%" stop-color="#6f7b91"/>
+                        <stop offset="100%" stop-color="#e2e8f0"/>
+                      </linearGradient>
+                      <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffe699"/>
+                        <stop offset="50%" stop-color="#d4af37"/>
+                        <stop offset="100%" stop-color="#8a6d1c"/>
+                      </linearGradient>
+                      <linearGradient id="chargeRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fde047"/>
+                        <stop offset="30%" stop-color="#f472b6"/>
+                        <stop offset="70%" stop-color="#c084fc"/>
+                        <stop offset="100%" stop-color="#a855f7"/>
+                      </linearGradient>
+                      <radialGradient id="chargeDiscGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fde047" stop-opacity="0.85"/>
+                        <stop offset="35%" stop-color="#f472b6" stop-opacity="0.75"/>
+                        <stop offset="70%" stop-color="#9333ea" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#3b0764" stop-opacity="0"/>
+                      </radialGradient>
+                      <filter id="medallionShadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity="0.9"/>
+                      </filter>
+                      <filter id="ironBevel" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.9"/>
+                      </filter>
+                    </defs>
+
+                    <!-- Magical Expanding Energy Disc (Charges on click) -->
+                    <circle id="magic-energy-disc" cx="150" cy="150" r="0" fill="url(#chargeDiscGrad)" opacity="0"/>
+
+                    <!-- Ouroboros Outer Serpent Body with Scales Pattern -->
+                    <circle cx="150" cy="150" r="130" stroke="url(#silverGrad)" stroke-width="14" fill="none" stroke-dasharray="16 5" filter="url(#medallionShadow)"/>
+                    <circle cx="150" cy="150" r="117" stroke="#16151c" stroke-width="3" fill="none"/>
+                    <circle cx="150" cy="150" r="111" stroke="url(#goldGlow)" stroke-width="2.5" fill="none"/>
+
+                    <!-- Active Charging Ring (Fills dynamically on open) -->
+                    <circle id="magic-charge-ring" cx="150" cy="150" r="130" 
+                            stroke="url(#chargeRingGrad)" stroke-width="8" fill="none" 
+                            stroke-linecap="round"
+                            stroke-dasharray="816.8" stroke-dashoffset="816.8" 
+                            opacity="0"
+                            style="filter: drop-shadow(0 0 12px #e879f9) drop-shadow(0 0 25px #a855f7);"/>
+
+                    <!-- Runes Ring -->
+                    <g class="runic-ring">
+                      <circle cx="150" cy="150" r="124" stroke="#f1d48c" stroke-width="1.8" stroke-dasharray="3 16" fill="none"/>
+                    </g>
+
+                    <!-- Silver Pentagram -->
+                    <polygon points="150,38 184,124 274,128 204,185 228,272 150,221 72,272 96,185 26,128 116,124" 
+                             fill="rgba(24, 20, 32, 0.45)" 
+                             stroke="url(#silverGrad)" 
+                             stroke-width="5.5" 
+                             stroke-linejoin="round"
+                             filter="url(#medallionShadow)" />
+                    
+                    <!-- Interlacing lines -->
+                    <line x1="150" y1="38" x2="228" y2="272" stroke="url(#silverGrad)" stroke-width="3.5" />
+                    <line x1="228" y1="272" x2="26" y2="128" stroke="url(#silverGrad)" stroke-width="3.5" />
+                    <line x1="26" y1="128" x2="274" y2="128" stroke="url(#silverGrad)" stroke-width="3.5" />
+                    <line x1="274" y1="128" x2="72" y2="272" stroke="url(#silverGrad)" stroke-width="3.5" />
+                    <line x1="72" y1="272" x2="150" y2="38" stroke="url(#silverGrad)" stroke-width="3.5" />
+
+                    <!-- Center bezel for the gemstone -->
+                    <circle cx="150" cy="150" r="24" fill="#1b1822" stroke="url(#goldGlow)" stroke-width="3.5" filter="url(#medallionShadow)"/>
+                  </svg>
+
+                  <!-- Magical Burst Container (Centered on medallion) -->
+                  <div class="magic-burst-box" id="magic-burst-box"></div>
+
+                  <!-- Central Glowing Gemstone (Cabochon) -->
+                  <div class="magical-gemstone" id="magical-gemstone">
+                    <div class="gem-highlight"></div>
+                  </div>
+                </div>
+
+                <!-- Protective Seal (Pure typography, no emojis) -->
+                <div class="curse-protection-seal">
+                  <span class="seal-glyph">✦</span>
+                  <span class="seal-text">Защищено от порчи на понос</span>
+                  <span class="seal-glyph">✦</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Heavy Forged Iron Lock & Clasp Mechanism (No emojis, no prompt tag) -->
+            <div class="hasp-lock-mechanism" id="hasp-lock-mechanism" role="button" tabindex="0" title="Открыть замок">
+              <div class="hasp-strap">
+                <div class="strap-rivet"></div>
+                <div class="strap-rivet"></div>
+              </div>
+              <div class="hasp-padlock">
+                <div class="padlock-body">
+                  <!-- Classic Antique Keyhole SVG -->
+                  <svg viewBox="0 0 30 40" class="vintage-keyhole-svg">
+                    <circle cx="15" cy="12" r="7" fill="#1a1205" stroke="#4a3408" stroke-width="1.5"/>
+                    <polygon points="11,14 19,14 17,32 13,32" fill="#1a1205" stroke="#4a3408" stroke-width="1.5"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Inside Back Face of Front Cover (Old Dark Royal Vintage Endpaper) -->
+          <div class="cover-face-inside">
+            <div class="inside-lining-pattern">
+              <div class="lining-corner c-tl">✦</div>
+              <div class="lining-corner c-tr">✦</div>
+              <div class="lining-corner c-bl">✦</div>
+              <div class="lining-corner c-br">✦</div>
+              <div class="vintage-ex-libris">
+                <span class="ex-libris-title">EX LIBRIS</span>
+                <span class="ex-libris-name">ANNA</span>
+                <span class="ex-libris-sub">22 СЕНТЯБРЯ</span>
+              </div>
+              <div class="page-bottom-nav nav-left-align" style="position: absolute; bottom: 1.2em; left: 1.8em; z-index: 20;">
+                <button class="close-book-link page-close-btn" title="Закрыть гримуар">
+                  Закрыть гримуар ✕
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  <!-- Global Spread Navigation Ribbon (Floats below the opened book) -->
+  <div class="book-spread-nav" id="book-spread-nav">
+    <button class="spread-nav-arrow" id="spread-prev-arrow" title="Предыдущий разворот">‹</button>
+    <div class="spread-nav-tabs">
+      <button class="spread-tab-btn active" data-spread="0">Анкета</button>
+      <button class="spread-tab-btn" data-spread="1">Способности</button>
+      <button class="spread-tab-btn" data-spread="2">Глава I</button>
+      <button class="spread-tab-btn" data-spread="3">Глава II</button>
+      <button class="spread-tab-btn" data-spread="4">Альбом I</button>
+      <button class="spread-tab-btn" data-spread="5">Альбом II</button>
+      <button class="spread-tab-btn" data-spread="6">Глава IV</button>
+    </div>
+    <button class="spread-nav-arrow" id="spread-next-arrow" title="Следующий разворот">›</button>
+  </div>
+
+  <!-- Fullscreen Photo Modal -->
+  <div id="photo-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      <div class="modal-img-wrapper">
+        <img id="modal-img" src="" alt="Фото">
+      </div>
+      <div class="modal-caption">
+        <h4 id="modal-title"></h4>
+        <p id="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Magic Burst Particles & Smoke Overlay Container -->
+  <div id="magic-burst-overlay" class="magic-burst-overlay"></div>
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
